@@ -1,0 +1,309 @@
+body {
+    margin: 0;
+    height: 100vh;
+    padding: 0;
+    background: rgb(15, 0, 31);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden; /* স্ক্রলবার বন্ধ রাখার জন্য */
+    position: relative;
+    width: 100%;
+}
+.header{
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+/* ব্যাকগ্রাউন্ড এনিমেশন (উড়া ধুরা কালার ইফেক্ট) */
+.glow-bg {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.721) 0%, rgba(0, 0, 0, 0) 70%);
+    filter: blur(80px);
+    border-radius: 50%;
+    z-index: -1;
+    animation: moveGlow 8s infinite alternate ease-in-out;
+}
+
+@keyframes moveGlow {
+    0% { top: 10%; left: 10%; transform: scale(1); }
+    50% { top: 50%; left: 60%; transform: scale(1.2); }
+    100% { top: 80%; left: 20%; transform: scale(0.8); }
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    position: relative;
+}
+
+.content-header {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    transition: all 0.5s ease;
+}
+
+.title-content {
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    margin: 0;
+    margin-top: 50px;
+}
+
+.background-content{
+    position: absolute;
+    top: 0;
+    width: 120%;
+}
+
+.small-title {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 15px;
+    opacity: 0.7;
+    transition: all 0.5s ease;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* কমন বাটন স্টাইল */
+.glass-btn {
+    width: 280px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 15px;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 5;
+    outline: none;
+}
+
+.primary {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.secondary {
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+/* ম্যাজিক ইফেক্ট: হোভার করলে যা হবে */
+
+/* ১. মাউস যখন প্রাইমারি বাটনে যাবে, তখন সেকেন্ডারি বাটন ও ছোট টাইটেল ভ্যানিশ হবে */
+.button-group:has(.primary:hover) .secondary {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.button-group:has(.primary:hover) ~ .content-header .small-title {
+    /* (যদি স্ট্রাকচার অনুযায়ী কাজ না করে তবে নিচের সহজ উপায়টি দেখুন) */
+}
+
+/* সহজ উপায়: যখন Primary তে মাউস থাকবে তখন বডি-র ভেতরের পরিবর্তন */
+body:has(.primary:hover) .secondary, 
+body:has(.primary:hover) .small-title {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* প্রাইমারি বাটন হোভার স্টাইল */
+.primary:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(248, 215, 249, 0.4);
+}
+
+
+/* সাইড প্যানেল ডিজাইন */
+.side-panel {
+    position: fixed;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    height: 60vh; /* তোমার রিকুয়েস্ট অনুযায়ী 60vh */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 20px 10px;
+    z-index: 100;
+    overflow: hidden; /* স্ক্রলবার পুরোপুরি বন্ধ */
+    transition: all 0.5s ease;
+}
+
+/* সার্চ বাটনে হোভার করলে প্যানেল ভ্যানিশ হবে */
+body:has(.primary:hover) .side-panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) translateX(-30px);
+}
+
+.panel-title {
+    color: rgb(248, 215, 249);
+    font-size: 11px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+/* অ্যানিমেশন কন্টেইনার */
+.scroller-container {
+    height: calc(100% - 40px);
+    overflow: hidden;
+    position: relative;
+}
+
+.scroller-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: verticalScroll 15s linear infinite; /* লুপ অ্যানিমেশন */
+}
+
+/* মাউস প্যানেলে নিলে অ্যানিমেশন থেমে যাবে (পড়ার সুবিধার জন্য) */
+.scroller-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes verticalScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); } /* অর্ধেকটা উপরে উঠলেই আবার লুপ শুরু হবে */
+}
+
+.student-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.student-item p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: #f8d7f9;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #f8d7f9;
+}
+
+/* মোবাইল এবং ট্যাবলেটের জন্য রেসপন্সিভ সেটিংস */
+@media (max-width: 768px) {
+    
+    /* ১. ব্যাকগ্রাউন্ড অ্যানিমেশন ছোট করা */
+    .glow-bg {
+        width: 250px;
+        height: 250px;
+        filter: blur(50px);
+    }
+
+    /* ২. টাইটেল সাইজ কমানো */
+    .content-header {
+        top: 30px;
+    }
+
+    .title-content {
+        font-size: 22px;
+        letter-spacing: 3px;
+        padding: 0 10px;
+    }
+
+    .small-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    /* ৩. সাইড প্যানেল পজিশন পরিবর্তন */
+    /* মোবাইলে এটি বাম পাশে না রেখে নিচে বাটনগুলোর নিচে সুন্দরভাবে দেখাবে */
+    .side-panel {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 90%; /* স্ক্রিনের প্রস্থ অনুযায়ী */
+        height: 200px; /* মোবাইলে হাইট কমিয়ে আনা হয়েছে */
+        margin: 20px auto;
+        order: 2; /* বাটনগুলোর নিচে দেখানোর জন্য */
+    }
+
+    /* হোভার ইফেক্ট মোবাইলে কাজ করবে না, তাই এটি ফিক্সড রাখা ভালো */
+    body:has(.primary:hover) .side-panel {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    /* ৪. কন্টেইনার এবং বাটন ম্যানেজমেন্ট */
+    .container {
+        height: auto;
+        padding-top: 150px; /* টাইটেল থেকে দূরত্ব */
+        flex-direction: column;
+        display: flex;
+    }
+
+    .button-group {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .glass-btn {
+        width: 100%; /* মোবাইলে বাটন পুরো চওড়া হবে */
+        max-width: 320px;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    /* ৫. অ্যানিমেশন স্পিড মোবাইলে একটু কমানো (ব্যাটারি সেভ করার জন্য) */
+    .scroller-content {
+        animation: verticalScroll 20s linear infinite;
+    }
+}
+
+/* অতি ক্ষুদ্র ডিভাইসের জন্য (যেমন: iPhone SE বা ছোট ফোন) */
+@media (max-width: 400px) {
+    .title-content {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+    
+    .side-panel {
+        width: 85%;
+        height: 150px;
+    }
+}
