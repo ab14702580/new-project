@@ -12,6 +12,8 @@ body {
     height: 100vh;
     width: 100%;
     overflow: hidden;
+    position: absolute;
+    top: 0;
 }
 /* ব্যাকগ্রাউন্ড এনিমেশন (উড়া ধুরা কালার ইফেক্ট) */
 .glow-bg {
@@ -21,7 +23,7 @@ body {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.721) 0%, rgba(0, 0, 0, 0) 70%);
     filter: blur(80px);
     border-radius: 50%;
-    z-index: -1;
+    z-index: -4;
     animation: moveGlow 8s infinite alternate ease-in-out;
 }
 
@@ -306,4 +308,466 @@ body:has(.primary:hover) .side-panel {
         width: 85%;
         height: 150px;
     }
+}
+
+
+
+/* ডিফল্ট অবস্থায় সাইড প্যানেল (Infinite Scroll On) */
+.side-panel {
+    position: fixed;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    height: 60vh;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 20px 10px;
+    z-index: 100;
+    overflow: hidden; /* ডিফল্ট অবস্থায় স্ক্রল বন্ধ */
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* অটো-স্ক্রলিং অ্যানিমেশন */
+.scroller-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: verticalScroll 15s linear infinite; 
+}
+
+@keyframes verticalScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* যখন সার্চ ক্লিক করা হবে (পপ-আপ মোড) */
+.side-panel.expanded.active {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 90%;
+    max-width: 500px;
+    height: 65vh;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(25px) saturate(180%);
+    overflow-y: auto; /* এখন ইউজার স্ক্রল করতে পারবে */
+    z-index: 9999;
+}
+
+/* পপ-আপ মোডে অটো-অ্যানিমেশন বন্ধ */
+.side-panel.expanded.active .scroller-content {
+    animation: none;
+    transform: none !important;
+    overflow-y: visible;
+}
+
+/* ওয়াটার ব্লার ওভারলে */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+
+/* স্ক্রলবার হাইড (ঐচ্ছিক: চাইলে পপ-আপে দেখাতে পারো) */
+.side-panel.expanded::-webkit-scrollbar { width: 0px; }
+
+
+/* ২. সাদা অ্যানিমেটেড ডিভ (সবার নিচে থাকবে) */
+
+/* ৩. কালো টেক্সট যা সাদা ডিভটির উপরে থাকবে */
+.background-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150vw;
+    height: 150vh;
+    z-index: -3; /* অ্যানিমেটেড ডিভ (z-index -3) এর উপরে */
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+}
+
+#bg-text {
+    color: #000000; /* টেক্সট কালো */
+    font-weight: normal; /* নরমাল ফন্ট */
+    font-size: 15px;
+    line-height: 1.6;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.8; /* সাদা ডিভের ওপর কালো টেক্সট সুন্দর ফুটে ওঠার জন্য */
+}
+
+
+/* পপ-আপ মোড যখন একটিভ হবে */
+.side-panel.expanded.active {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 90%;
+    max-width: 500px;
+    height: 65vh;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(25px) saturate(180%);
+    z-index: 9999;
+    overflow: hidden; /* মেইন প্যানেল ফিক্সড থাকবে */
+}
+
+/* পপ-আপ মোডে অটো-অ্যানিমেশন বন্ধ এবং ম্যানুয়াল স্ক্রল চালু */
+.side-panel.expanded.active .scroller-container {
+    height: calc(100% - 50px);
+    overflow-y: auto; /* এখানে স্ক্রল হবে */
+}
+
+.side-panel.expanded.active .scroller-content {
+    animation: none !important; /* অ্যানিমেশন বন্ধ */
+    transform: none !important; /* পজিশন রিসেট */
+}
+
+/* সুন্দর চিকন স্ক্রলবার (ঐচ্ছিক) */
+.side-panel.expanded.active .scroller-container::-webkit-scrollbar {
+    width: 5px;
+}
+.side-panel.expanded.active .scroller-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+/* Add Information Modal Design */
+.add-info-modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    display: none; /* ডিফল্ট ভাবে লুকানো */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.add-info-modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 15px;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input-group input:focus {
+    border-color: #f8d7f9;
+}
+
+/* আগের সব কোড ঠিক থাকবে, শুধু নিচের অংশগুলো আপডেট বা যোগ করুন */
+
+body {
+    margin: 0;
+    min-height: 100vh; /* height এর বদলে min-height */
+    padding: 0;
+    background: rgb(15, 0, 31);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden; /* ডানে-বামে স্ক্রল বন্ধ */
+    position: relative;
+    width: 100%;
+}
+
+/* মোবাইলে যাতে স্ক্রল করা যায় */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* মোবাইলে উপর-নিচ স্ক্রল চালু */
+    }
+}
+
+.header {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    position: fixed; /* absolute থেকে fixed যাতে স্ক্রল করলেও ব্যাকগ্রাউন্ড না নড়ে */
+    top: 0;
+    z-index: -5;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* রেসপন্সিভ মিডিয়া কোয়েরি - এটি আপনার কোডের নিচের দিকে আপডেট করুন */
+@media (max-width: 768px) {
+    .content-header {
+        position: relative; /* মোবাইলে ফিক্সড পজিশন বাদ */
+        top: 0;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .title-content {
+        font-size: 28px;
+        letter-spacing: 2px;
+        margin-top: 20px;
+    }
+
+    .container {
+        min-height: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        flex-direction: column;
+    }
+
+    .side-panel {
+        position: relative !important; /* মোবাইলে সাইডে না থেকে নিচে থাকবে */
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 350px;
+        height: 300px !important;
+        margin: 30px auto;
+        box-sizing: border-box;
+    }
+
+    /* পপ-আপ মোড মোবাইলে */
+    .side-panel.expanded.active {
+        position: fixed !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90% !important;
+        height: 70vh !important;
+    }
+
+    .glass-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .background-content {
+        width: 200%; /* মোবাইলে টেক্সট ব্যাকগ্রাউন্ড আরও বড় */
+    }
+}
+
+/* পপ-আপ বাটন এবং ইনপুট মোবাইলে সুন্দর দেখানোর জন্য */
+.modal-content {
+    width: 85%;
+    padding: 20px;
+}
+
+
+
+
+.scroller-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    will-change: transform; /* এনিমেশন স্মুথ করার জন্য */
+    animation: verticalScroll 20s linear infinite;
+}
+
+/* মাউস হোভার করলে থামবে */
+.scroller-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes verticalScroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); } /* অর্ধেক ডিস্ট্যান্স পার হলেই রিসেট */
+}
+
+/* যখন সার্চ মোড অন হবে তখন এনিমেশন বন্ধ */
+.side-panel.active .scroller-content {
+    animation: none !important;
+}
+
+/* সাইড প্যানেলের মূল ডিজাইন */
+.side-panel {
+    position: fixed;
+    /* ১৮০০ পিক্সেল কন্টেইনারের বাম পাশ থেকে ৪০ পিক্সেল ভেতরে রাখার ক্যালকুলেশন */
+    left: 40px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    height: 60vh;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 20px 10px;
+    z-index: 100;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* যখন স্ক্রিন ১৮০০ পিক্সেলের চেয়ে বড় হবে */
+@media (min-width: 1800px) {
+    .side-panel {
+        /* (স্ক্রিনের মোট প্রস্থ - ১৮০০)/২ করলে আমরা কন্টেইনারের শুরুর পজিশন পাই */
+        left: calc((100vw - 1800px) / 2 + 40px);
+    }
+}
+
+/* মোবাইলে পজিশন ঠিক করা (৭৬৮ পিক্সেল বা তার নিচে) */
+@media (max-width: 768px) {
+    .side-panel {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+        width: 90% !important;
+        max-width: 320px;
+        margin: 20px auto;
+        height: 250px !important;
+        order: 2; /* বাটনের নিচে দেখানোর জন্য */
+    }
+
+    /* মোবাইল পপ-আপ মোড হলে আবার ফিক্সড হবে */
+    .side-panel.expanded.active {
+        position: fixed !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90% !important;
+        height: 65vh !important;
+    }
+}
+
+/* ১. পপ-আপ মোড একটিভ হলে ওভারলে-র ব্লার কমানো */
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    /* এখানে blur(10px) এর বদলে blur(3px) করা হয়েছে যাতে ব্যাকগ্রাউন্ড পরিষ্কার থাকে */
+    background: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(3px); 
+    z-index: 9998;
+}
+
+/* ২. বড় ডিভাইসে সাইড প্যানেলের সার্চ মোড */
+.side-panel.expanded.active {
+    /* স্ক্রিনের মাঝখানে নিয়ে আসা */
+    left: 50% !important; 
+    top: 50% !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    
+    width: 500px; /* ডেস্কটপে নির্দিষ্ট চওড়া */
+    height: 65vh;
+    background: rgba(15, 0, 31, 0.95); /* সলিড ডার্ক কালার যাতে কন্টেন্ট ক্লিয়ার থাকে */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    backdrop-filter: none; /* এখানে ব্লার বন্ধ করা হয়েছে যাতে ঝাপসা না লাগে */
+    z-index: 9999;
+}
+
+/* ৩. হোভার ইফেক্ট ক্ল্যাশ বন্ধ করা */
+/* মাউস বাটনে নিলে সাইড প্যানেল ভ্যানিশ হওয়ার যে লজিক ছিল, সেটি সার্চ মোডে অফ রাখা */
+body:has(.primary:hover) .side-panel.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* ৪. লিস্টের টেক্সট কালার আরও উজ্জ্বল করা */
+.side-panel.active .student-item p {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+
+/* প্রোফাইল কার্ড স্টাইল */
+.profile-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 70%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 30px;
+    color: white;
+    text-align: center;
+    z-index: 10001;
+    display: none;
+    transition: all 0.4s ease;
+}
+
+.back-btn {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    display: none;
+    z-index: 10002;
+    transition: 0.3s;
+}
+
+.back-btn:hover { background: white; color: black; }
+
+/* প্রোফাইল মোডে সব হাইড করার ক্লাস */
+.hide-layout {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+/* বড় ডিভাইসের জন্য ১৮০০ পিক্সেল লজিক */
+@media (min-width: 1800px) {
+    .container, .content-header {
+        max-width: 1800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .side-panel:not(.active) {
+        left: calc((100vw - 1800px) / 2 + 40px);
+    }
+}
+
+/* মোবাইল রেসপনসিভনেস */
+@media (max-width: 768px) {
+    .title-content { font-size: 24px; letter-spacing: 2px; }
+    .side-panel:not(.active) {
+        position: relative !important;
+        left: 0 !important; top: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        height: 200px !important;
+        margin: 20px auto;
+    }
+    .container { padding-top: 120px; flex-direction: column; }
+    .glass-btn { width: 100%; max-width: 300px; }
 }
