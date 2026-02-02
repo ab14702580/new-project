@@ -44,12 +44,20 @@
 <button class="back-btn" id="backBtn">← Back</button>
 
 <div class="profile-card" id="profileCard">
-    <div class="status-dot" style="margin: 0 auto 15px; width: 12px; height: 12px;"></div>
+    <div class="profile-img-container">
+        <img src="" id="display-img" alt="Student Image">
+    </div>
     <h2 id="display-name"></h2>
-    <p class="small-title" style="opacity: 0.6; font-size: 12px;">Zenith Student Database</p>
+    <p id="display-nickname" style="color: #f8d7f9; opacity: 0.8; font-size: 14px; margin-top: -10px;"></p>
+    
     <div class="student-info-grid">
         <p><strong>Batch:</strong> SSC 2026</p>
         <p><strong>Status:</strong> Active</p>
+    </div>
+
+    <div class="social-links">
+        <a href="#" id="fb-link" target="_blank" class="social-btn fb">Facebook</a>
+        <a href="#" id="wa-link" target="_blank" class="social-btn wa">WhatsApp</a>
     </div>
 </div>
 <div class="add-info-modal" id="addInfoModal">
@@ -201,6 +209,52 @@
     const bgContent = document.querySelector('.background-content p');
     const text = " DEVOLOPER ABDULLAH - DESIGNER TANJIM";
     bgContent.innerText = text.repeat(500);
+
+    // সব ডেটা একটি অবজেক্টে রাখা (ভবিষ্যতে আপনি এখানে আরও নাম যোগ করতে পারবেন)
+const studentData = {
+    "Abrar Fahim": {
+        nickname: "Fahim",
+        img: "https://via.placeholder.com/150", // এখানে ছবির লিংক হবে
+        fb: "https://facebook.com/abrar",
+        wa: "https://wa.me/880123456789"
+    },
+    "Samiul Islam": {
+        nickname: "Sami",
+        img: "https://via.placeholder.com/150",
+        fb: "https://facebook.com/samiul",
+        wa: "https://wa.me/880123456789"
+    }
+};
+
+document.addEventListener('click', (e) => {
+    const item = e.target.closest('.student-item');
+    
+    if (item) {
+        const name = item.querySelector('p').innerText;
+        const data = studentData[name] || { nickname: "N/A", img: "default.jpg", fb: "#", wa: "#" };
+
+        // মেইন কন্টেন্ট হাইড করা
+        mainContainer.classList.add('hide-layout');
+        mainHeader.classList.add('hide-layout');
+        sidePanel.style.opacity = '0';
+        sidePanel.style.visibility = 'hidden';
+
+        // কার্ডে তথ্য সেট করা
+        displayName.innerText = name;
+        document.getElementById('display-nickname').innerText = `(${data.nickname})`;
+        document.getElementById('display-img').src = data.img;
+        document.getElementById('fb-link').href = data.fb;
+        document.getElementById('wa-link').href = data.wa;
+
+        // প্রোফাইল কার্ড দেখানো
+        profileCard.style.display = 'block';
+        setTimeout(() => {
+            profileCard.style.transform = 'translate(-50%, -50%) scale(1)';
+            profileCard.style.opacity = '1';
+        }, 10);
+        backBtn.style.display = 'block';
+    }
+});
 </script>
 </body>
 </html>
