@@ -1004,7 +1004,7 @@ hr{
     /* দ্বিতীয় লাইনের ফন্ট সাইজ একটু ছোট কিন্তু বোল্ড */
     .second-h1 {
         font-size: 2.2rem !important;
-        margin-top: 20px;
+        margin-top: 20px; 
     }
 
 
