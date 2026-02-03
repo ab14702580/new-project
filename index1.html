@@ -9,10 +9,14 @@
 <body>
 
 <div class="animation-1">
-    <div class="welcome">
+    <div class="welcome" id="first-animation">
         <h1 class="welcome-h1">welcome from</h1>
         <hr>
         <h1 class="ssc-h1">s.s.c 2026 candidate</h1>
+    </div>
+    <div id="second-animation" class="devoloper-intro">
+        <span>DEVOLOPER</span><span> By </span><span>ABDULLAH</span>
+        <span>DESIGN<span> INTRO</span><span> TANJIM</span></span>
     </div>
 </div>
 
@@ -187,7 +191,14 @@
         profileCard.style.opacity = '0';
         backBtn.style.display = 'none';
     });
-
+setTimeout(function() {
+        // প্রথম ডিভটিকে পুরোপুরি রিমুভ করা হচ্ছে
+        document.getElementById('first-animation').style.display = 'none';
+        
+        // দ্বিতীয় ডিভটিকে দেখানো হচ্ছে
+        const secondDiv = document.getElementById('second-animation');
+        secondDiv.style.display = 'block';
+    }, 3000);
     // সার্চ টগল ফাংশন
     function toggleSearch() {
         const isActive = sidePanel.classList.contains('active');
