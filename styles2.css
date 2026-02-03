@@ -933,11 +933,7 @@ hr{
     }
 }
 
-@media (max-width: 600px){
-    .welcome h1{
-        font-size: 30px;
-    }
-}
+
 
 .devoloper-intro {
         background-color: #0b011a; /* ডার্ক পার্পল/ব্ল্যাক শেড */
@@ -1010,3 +1006,13 @@ hr{
         font-size: 2.2rem !important;
         margin-top: 20px;
     }
+
+
+@media (max-width: 600px){
+    .welcome h1{
+        font-size: 30px;
+    }
+    .devoloper-intro span{
+        font-size: 19px;
+    }
+}
