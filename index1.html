@@ -21,7 +21,7 @@
 </div>
 
 
-<div class="all-header-div">
+<div class="all-header-div" id="main-content" style="display: none;">
 <div class="header">
     <div class="glow-bg"></div> 
     <div class="background-content"><p id="bg-text"></p></div>
@@ -199,6 +199,20 @@ setTimeout(function() {
         const secondDiv = document.getElementById('second-animation');
         secondDiv.style.display = 'block';
     }, 3000);
+
+    setTimeout(function() {
+    // ১. অ্যানিমেশন ডিভটি পুরোপুরি ডোম থেকে রিমুভ করা
+    const introLayer = document.querySelector('.animation-1');
+    if (introLayer) {
+        introLayer.remove(); // এটা মেমোরি থেকে একদম মুছে ফেলবে
+    }
+
+    // ২. মেইন কন্টেন্ট সেকশনটি প্রদর্শন করা
+    const mainContent = document.getElementById('main-content');
+    if (mainContent) {
+        mainContent.style.display = 'block';
+    }
+}, 7900); // ৭.৫ সেকেন্ড পর কার্যকর হবে
     // সার্চ টগল ফাংশন
     function toggleSearch() {
         const isActive = sidePanel.classList.contains('active');

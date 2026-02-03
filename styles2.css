@@ -818,7 +818,7 @@ body:has(.primary:hover) .side-panel.active {
 
 .animation-1{
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 1000000000000;
     background: rgb(15, 0, 31);
     position: absolute;
@@ -1031,4 +1031,15 @@ hr{
         opacity: 0;
         display: none;
     }
+}
+
+/* অ্যানিমেশন চলাকালীন স্ক্রলবার বন্ধ রাখা */
+body {
+    overflow-x: hidden;
+}
+
+/* যখন মেইন কন্টেন্ট আসবে তখন স্ক্রলবার সচল হবে */
+#main-content {
+    width: 100%;
+    min-height: 100vh;
 }
