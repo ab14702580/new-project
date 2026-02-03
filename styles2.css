@@ -1016,3 +1016,19 @@ hr{
         font-size: 19px;
     }
 }
+
+.animation-1{
+    animation: show 8s linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes show{
+    0%{
+        opacity: 1;
+    }
+    90%{opacity: 1;}
+    100%{
+        opacity: 0;
+        display: none;
+    }
+}
