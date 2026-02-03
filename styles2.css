@@ -14,7 +14,6 @@ body {
     width: 100%;
     overflow: hidden;
     position: absolute;
-    display: none;
     top: 0;
 }
 /* ব্যাকগ্রাউন্ড এনিমেশন (উড়া ধুরা কালার ইফেক্ট) */
@@ -893,9 +892,35 @@ hr{
     animation: second-animation 3s linear;
     display: none;
 }
-
+.second-h1{
+    margin-top: 50px;
+}
 .devoloper-intro span{
-    transform: translate(0, 50px);
+    transform: translate(0, 0);
+    display: inline-block;
+    animation-fill-mode: forwards;
+}
+.developer{
+    opacity: 1;
+    animation: visible 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+.By{
+    animation: visible 1s ease-in-out 0.1s;
+    opacity: 0;
+}
+.abdullah{animation: visible 1s ease-in-out 0.2s;
+    opacity: 0;}
+.design{animation: visible 1s ease-in-out 0.3s;
+    opacity: 0;}
+.intro{animation: visible 1s ease-in-out 0.4s;
+    opacity: 0;}
+.tanjim{animation: visible 1s ease-in-out 0.5s;
+    opacity: 0;}
+@keyframes visible {
+    0%{opacity: 0; transform: translate(0,40px);}
+    50%{opacity: 1; transform: translate(0,-40px);}
+    100%{opacity: 1; transform: translate(0,0);}
 }
 
 
@@ -913,3 +938,75 @@ hr{
         font-size: 30px;
     }
 }
+
+.devoloper-intro {
+        background-color: #0b011a; /* ডার্ক পার্পল/ব্ল্যাক শেড */
+        padding: 60px;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .devoloper-intro h1 {
+        color: #ffffff;
+        margin: 10px 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-size: 2.5rem;
+    }
+
+    /* প্রথম লাইনের জন্য অ্যানিমেটেড গ্রেডিয়েন্ট টেক্সট */
+    .animated-gradient-text {
+        background: linear-gradient(90deg, #ff8a00, #e52e71, #00d2ff, #ff8a00);
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient-move 5s linear infinite alternate;
+        font-weight: bold;
+    }
+
+    /* দ্বিতীয় লাইনের জন্য স্টাইল */
+    .second-h1 {
+        font-size: 1.8rem !important;
+        color: #00d2ff !important; /* ইলেকট্রিক ব্লু */
+        opacity: 0.9;
+        font-weight: 400;
+    }
+
+    .second-h1 span:last-child {
+        color: #f1c40f; /* তানজিম নামটির জন্য গোল্ডেন কালার */
+        font-weight: bold;
+    }
+
+    /* অ্যানিমেশন কিফ্রেম */
+    @keyframes gradient-move {
+        0% { background-position: 0%; }
+        100% { background-position: 100%; }
+    } 
+    .devoloper-intro {
+        background-color: #0b011a; /* আপনার দেওয়া ইমেজের ব্যাকগ্রাউন্ড কালার */
+        padding: 80px 20px;
+        text-align: center;
+        font-family: 'Arial Black', Gadget, sans-serif; /* ক্লাসিক বোল্ড ফন্ট */
+    }
+
+    /* প্রথম লাইনের স্টাইল */
+    .devoloper-intro h1 {
+        margin: 15px 0;
+        text-transform: uppercase;
+        font-size: 3rem;
+        letter-spacing: 3px;
+    }
+
+    /* সলিড ব্রাইট কালারস */
+    .color-pink { color: #FF007F; }   /* ব্রাইট নিওন পিঙ্ক */
+    .color-white { color: #FFFFFF; }  /* পিওর হোয়াইট (ক্লাসিক) */
+    .color-cyan { color: #00FFFF; }   /* ইলেকট্রিক সায়ান/ব্লু */
+    
+    .color-yellow { color: #FFFF00; } /* উজ্জ্বল হলুদ */
+    .color-orange { color: #FF5E00; } /* ভাইব্রেন্ট অরেঞ্জ */
+
+    /* দ্বিতীয় লাইনের ফন্ট সাইজ একটু ছোট কিন্তু বোল্ড */
+    .second-h1 {
+        font-size: 2.2rem !important;
+        margin-top: 20px;
+    }
