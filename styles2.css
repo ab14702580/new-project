@@ -1306,3 +1306,23 @@ hr{
     justify-content: center;
     margin-top: 10px;
 }
+
+/* স্ক্রিনশট এবং স্ক্রিন রেকর্ডিং এর সময় কন্টেন্ট প্রোটেকশন (Experimental) */
+@media screen {
+    #gift-section {
+        /* এটি কিছু আধুনিক ব্রাউজারে কন্টেন্ট কপি বা ক্যাপচার করা কঠিন করে তোলে */
+        content-visibility: auto;
+    }
+}
+
+/* যখন প্রিন্ট বা স্ক্রিন ক্যাপচার কমান্ড দেওয়া হয় তখন কন্টেন্ট হাইড করা */
+@media print {
+    body { display: none !important; }
+}
+
+/* কন্টেন্ট সিলেকশন বন্ধ রাখা */
+#gift-section {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

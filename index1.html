@@ -362,6 +362,15 @@ window.addEventListener('blur', function() {
         document.getElementById('main-content').style.filter = 'none';
     }
 });
+
+// ইউজার যখনই স্ক্রিনের ওপর আঙুল ছোঁয়াবে (Touch করবে), আমরা চেক করব সে কয়টা আঙুল ব্যবহার করছে
+document.addEventListener('touchstart', function(e) {
+    if (e.touches.length > 2) { // ৩ আঙুলে স্ক্রিনশট নেওয়ার চেষ্টা করলে
+        document.getElementById('gift-section').style.display = 'none';
+        document.getElementById('main-content').style.filter = 'none';
+        alert("Screenshot gesture detected! Security lock enabled.");
+    }
+}, false);
 </script>
 </body>
 </html>
