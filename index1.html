@@ -20,76 +20,98 @@
     </div>
 </div>
 
-
 <div class="all-header-div" id="main-content" style="display: none;">
-<div class="header">
-    <div class="glow-bg"></div> 
-    <div class="background-content"><p id="bg-text"></p></div>
-</div>
-
-<div class="content-header">
-    <h1 class="title-content">zenith private care</h1>
-    <h6 class="small-title">s.s.c. 2026</h6>
-</div>
-
-<div class="container">
-    <div class="button-group">
-        <button class="glass-btn primary">Search Student</button>
-        <button class="glass-btn secondary">Add Your Information</button>
+    <div class="header">
+        <div class="glow-bg"></div> 
+        <div class="background-content"><p id="bg-text"></p></div>
     </div>
-</div>
 
-<div class="side-panel">
-    <h3 class="panel-title">Active Database</h3>
-    <div class="scroller-container">
-        <div class="scroller-content">
-            <div class="student-item"><span class="status-dot"></span><p>Abrar Fahim</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Samiul Islam</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Tahmid Hasan</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Nusrat Jahan</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Karim Ullah</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Rifat Ahmed</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Abrar Fahim</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Samiul Islam</p></div>
-            <div class="student-item"><span class="status-dot"></span><p>Samiul Islam</p></div>
+    <div class="content-header">
+        <h1 class="title-content">zenith private care</h1>
+        <h6 class="small-title">s.s.c. 2026</h6>
+    </div>
+
+    <div class="container">
+        <div class="button-group">
+    <button class="glass-btn primary">Search Student</button>
+    <button class="glass-btn secondary">Add Your Information</button>
+    <button class="glass-btn gift-trigger-btn" id="giftOpenBtn">🎁 Claim Gift</button>
+</div>
+    </div>
+
+    <div id="codePopup" class="code-popup-overlay" style="display:none;">
+        <div class="code-popup-content">
+            <h3 style="color:white;">Enter Secret Code</h3>
+            <input type="password" id="giftPasscode" placeholder="Enter Spacial code" style="width: 80%; padding: 10px; margin-bottom: 15px; border-radius: 10px; border: none; text-align: center;">
+            <div class="popup-btns">
+                <button onclick="checkGiftCode()" class="glass-btn primary" style="width: 100px; padding: 8px;">Unlock</button>
+                <button onclick="closeCodePopup()" class="glass-btn secondary" style="width: 100px; padding: 8px;">Cancel</button>
+            </div>
         </div>
     </div>
-</div>
-<button class="back-btn" id="backBtn">← Back</button>
 
-<div class="profile-card" id="profileCard">
-    <div class="profile-img-container">
-        <img src="" id="display-img" alt="Student Image">
+    <div id="gift-section" class="gift-container" style="display:none;">
+    <div class="gift-content">
+        <div class="gift-icon" id="giftIcon">🎁</div>
+        <div class="gift-description">
+            <h1 id="giftTitle" style="color: #f8d7f9;">Congratulations!</h1>
+            <p id="giftMessage" style="color: white; font-size: 16px; line-height: 1.6;"></p>
+        </div>
+        <button class="glass-btn primary" onclick="closeGift()" style="width: 150px; margin: 20px auto 0;">Close</button>
     </div>
-    <h2 id="display-name"></h2>
-    <p id="display-nickname" style="color: #f8d7f9; opacity: 0.8; font-size: 14px; margin-top: -10px;"></p>
+</div>
+
+    <div class="side-panel">
+        <h3 class="panel-title">Active Database</h3>
+        <div class="scroller-container">
+            <div class="scroller-content">
+                <div class="student-item"><span class="status-dot"></span><p>Abrar Fahim</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Samiul Islam</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Tahmid Hasan</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Nusrat Jahan</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Karim Ullah</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Rifat Ahmed</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Abrar Fahim</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Samiul Islam</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Samiul Islam</p></div>
+            </div>
+        </div>
+    </div>
     
-    <div class="student-info-grid">
-        <p><strong>Batch:</strong> SSC 2026</p>
-        <p><strong>Status:</strong> Active</p>
-    </div>
+    <button class="back-btn" id="backBtn">← Back</button>
 
-    <div class="social-links">
-        <a href="#" id="fb-link" target="_blank" class="social-btn fb">Facebook</a>
-        <a href="#" id="wa-link" target="_blank" class="social-btn wa">WhatsApp</a>
-    </div>
-</div>
-<div class="add-info-modal" id="addInfoModal">
-    <div class="modal-content">
-        <h2 class="panel-title" style="font-size: 18px; color: white;">Add New Student</h2>
-        <div class="input-group">
-            <input type="text" id="studentName" placeholder="Enter Student Name">
-            <button class="glass-btn primary" id="saveBtn" style="width: 100%; margin-top: 15px;">Save Information</button>
-            <button class="glass-btn secondary" id="cancelBtn" style="width: 100%; margin-top: 10px; border-style: solid;">Cancel</button>
+    <div class="profile-card" id="profileCard">
+        <div class="profile-img-container">
+            <img src="" id="display-img" alt="Student Image">
+        </div>
+        <h2 id="display-name"></h2>
+        <p id="display-nickname" style="color: #f8d7f9; opacity: 0.8; font-size: 14px; margin-top: -10px;"></p>
+        
+        <div class="student-info-grid">
+            <p><strong>Batch:</strong> SSC 2026</p>
+            <p><strong>Status:</strong> Active</p>
+        </div>
+
+        <div class="social-links">
+            <a href="#" id="fb-link" target="_blank" class="social-btn fb">Facebook</a>
+            <a href="#" id="wa-link" target="_blank" class="social-btn wa">WhatsApp</a>
         </div>
     </div>
-</div>
-<div class="modal-overlay" id="overlay"></div>
 
-
+    <div class="add-info-modal" id="addInfoModal">
+        <div class="modal-content">
+            <h2 class="panel-title" style="font-size: 18px; color: white;">Add New Student</h2>
+            <div class="input-group">
+                <input type="text" id="studentName" placeholder="Enter Student Name">
+                <button class="glass-btn primary" id="saveBtn" style="width: 100%; margin-top: 15px;">Save Information</button>
+                <button class="glass-btn secondary" id="cancelBtn" style="width: 100%; margin-top: 10px; border-style: solid;">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <div class="modal-overlay" id="overlay"></div>
 </div>
+
 <script>
     const searchBtn = document.querySelector('.primary');
     const sidePanel = document.querySelector('.side-panel');
@@ -108,7 +130,25 @@
     const mainContainer = document.querySelector('.container');
     const mainHeader = document.querySelector('.content-header');
 
-    // ৭ বার ক্লিকের লজিক (Secret Access)
+    // --- Gift Logic (Merged) ---
+    const giftOpenBtn = document.getElementById('giftOpenBtn');
+    const codePopup = document.getElementById('codePopup');
+    const giftPasscode = document.getElementById('giftPasscode');
+    const giftSec = document.getElementById('gift-section');
+
+    if (localStorage.getItem('giftClaimed') === 'true') {
+        giftOpenBtn.style.display = 'block';
+    }
+
+    giftOpenBtn.addEventListener('click', () => {
+        codePopup.style.display = 'flex';
+    });
+
+    function closeCodePopup() {
+        codePopup.style.display = 'none';
+        giftPasscode.value = "";
+    }
+    // --- Your Original Logic (Untouched) ---
     addInfoBtn.addEventListener('click', () => {
         clickCount++;
         if (clickCount === 7) {
@@ -117,13 +157,11 @@
         }
     });
 
-    // ফর্ম বন্ধ করা
     cancelBtn.addEventListener('click', () => {
         addModal.classList.remove('show');
         studentInput.value = "";
     });
 
-    // ডেটা সেভ করা
     saveBtn.addEventListener('click', () => {
         const name = studentInput.value.trim();
         if (name !== "") {
@@ -137,83 +175,60 @@
         }
     });
 
-    // অটোমেটিক লিস্ট ডুপ্লিকেট (Infinite Loop)
     const originalItems = scrollerContent.innerHTML;
     scrollerContent.innerHTML = originalItems + originalItems;
 
-    // --- কার্ডে ক্লিক করলে সাইড প্যানেলসহ সব রিমুভ করার লজিক ---
     document.addEventListener('click', (e) => {
         const item = e.target.closest('.student-item');
-        
         if (item) {
             const name = item.querySelector('p').innerText;
-            
-            // ১. মেইন লেআউট এবং সাইড প্যানেল পুরোপুরি হাইড করা
             mainContainer.classList.add('hide-layout');
             mainHeader.classList.add('hide-layout');
-            
-            // সাইড প্যানেলকে অদৃশ্য এবং ক্লিকে অযোগ্য করা
             sidePanel.style.opacity = '0';
             sidePanel.style.visibility = 'hidden';
             sidePanel.style.pointerEvents = 'none';
-            
-            // সার্চ মোড খোলা থাকলে তা বন্ধ করা
             sidePanel.classList.remove('active', 'expanded');
             overlay.classList.remove('active');
-            
-            // ২. প্রোফাইল কার্ড দেখানো
             displayName.innerText = name;
             profileCard.style.display = 'block';
             setTimeout(() => {
                 profileCard.style.transform = 'translate(-50%, -50%) scale(1)';
                 profileCard.style.opacity = '1';
             }, 10);
-            
-            // ব্যাক বাটন দেখানো
             backBtn.style.display = 'block';
             searchBtn.innerText = "Search Student";
         }
     });
 
-    // ব্যাক বাটনে ক্লিক করলে ফিরে আসা
     backBtn.addEventListener('click', () => {
-        // ১. লেআউট এবং সাইড প্যানেল ফিরিয়ে আনা
         mainContainer.classList.remove('hide-layout');
         mainHeader.classList.remove('hide-layout');
-        
         sidePanel.style.opacity = '1';
         sidePanel.style.visibility = 'visible';
         sidePanel.style.pointerEvents = 'auto';
-        
-        // ২. প্রোফাইল কার্ড এবং ব্যাক বাটন লুকানো
         profileCard.style.display = 'none';
         profileCard.style.transform = 'translate(-50%, -50%) scale(0.9)';
         profileCard.style.opacity = '0';
         backBtn.style.display = 'none';
     });
-setTimeout(function() {
-        // প্রথম ডিভটিকে পুরোপুরি রিমুভ করা হচ্ছে
+
+    setTimeout(function() {
         document.getElementById('first-animation').style.display = 'none';
-        
-        // দ্বিতীয় ডিভটিকে দেখানো হচ্ছে
         const secondDiv = document.getElementById('second-animation');
         secondDiv.style.display = 'block';
     }, 3000);
 
     setTimeout(function() {
-    // ১. অ্যানিমেশন ডিভটি পুরোপুরি ডোম থেকে রিমুভ করা
-    const introLayer = document.querySelector('.animation-1');
-    if (introLayer) {
-        introLayer.remove(); // এটা মেমোরি থেকে একদম মুছে ফেলবে
-    }
+        const introLayer = document.querySelector('.animation-1');
+        if (introLayer) {
+            introLayer.remove();
+        }
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+            mainContent.style.display = 'block';
+        }
+    }, 7995);
 
-    // ২. মেইন কন্টেন্ট সেকশনটি প্রদর্শন করা
-    const mainContent = document.getElementById('main-content');
-    if (mainContent) {
-        mainContent.style.display = 'block';
-    }
-}, 7900); // ৭.৫ সেকেন্ড পর কার্যকর হবে
-    // সার্চ টগল ফাংশন
     function toggleSearch() {
         const isActive = sidePanel.classList.contains('active');
         if (!isActive) {
@@ -240,54 +255,111 @@ setTimeout(function() {
 
     overlay.addEventListener('click', toggleSearch);
 
-    // ব্যাকগ্রাউন্ড টেক্সট রিপিট
     const bgContent = document.querySelector('.background-content p');
     const text = " DEVOLOPER ABDULLAH - DESIGNER TANJIM";
     bgContent.innerText = text.repeat(500);
 
-    // সব ডেটা একটি অবজেক্টে রাখা (ভবিষ্যতে আপনি এখানে আরও নাম যোগ করতে পারবেন)
-const studentData = {
-    "Abrar Fahim": {
-        nickname: "Fahim",
-        img: "https://via.placeholder.com/150", // এখানে ছবির লিংক হবে
-        fb: "https://facebook.com/abrar",
-        wa: "https://wa.me/880123456789"
-    },
-    "Samiul Islam": {
-        nickname: "Sami",
-        img: "https://via.placeholder.com/150",
-        fb: "https://facebook.com/samiul",
-        wa: "https://wa.me/880123456789"
+    const studentData = {
+        "Abrar Fahim": { nickname: "Fahim", img: "https://via.placeholder.com/150", fb: "https://facebook.com/abrar", wa: "https://wa.me/880123456789" },
+        "Samiul Islam": { nickname: "Sami", img: "https://via.placeholder.com/150", fb: "https://facebook.com/samiul", wa: "https://wa.me/880123456789" }
+    };
+
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.student-item');
+        if (item) {
+            const name = item.querySelector('p').innerText;
+            const data = studentData[name] || { nickname: "N/A", img: "default.jpg", fb: "#", wa: "#" };
+            displayName.innerText = name;
+            document.getElementById('display-nickname').innerText = `(${data.nickname})`;
+            document.getElementById('display-img').src = data.img;
+            document.getElementById('fb-link').href = data.fb;
+            document.getElementById('wa-link').href = data.wa;
+        }
+    });
+    // --- ২ বার লিমিট করার লজিক ---
+window.checkGiftCode = function() {
+    // আগে কতবার ওপেন হয়েছে সেটা চেক করা
+    let openCount = parseInt(localStorage.getItem('giftUsageCount')) || 0;
+
+    // যদি ২ বার বা তার বেশি হয়ে যায়
+    if (openCount >= 2) {
+        alert("দুঃখিত! আপনি সর্বোচ্চ ২ বার গিফট ওপেন করে ফেলেছেন। আর সম্ভব নয়।");
+        document.getElementById('codePopup').style.display = 'none';
+        document.getElementById('giftPasscode').value = "";
+        return; // এখানেই কোড থামিয়ে দিবে
+    }
+
+    const giftDataMap = {
+        "1470": { title: "Special Member!", message: "Welcome Abdullah! You are the mastermind behind this project. Keep coding!", icon: "💻" },
+        "2580": { title: "Top Achiever", message: "SSC 2026 is your year! This secret access confirms you are ready to lead the batch.", icon: "🏆" },
+        "3690": { title: "Design King", message: "The visual aesthetic of this site is amazing, just like your creative mind!", icon: "🎨" },
+        "102030": { title: "VIP Access", message: "Success isn't just about hard work, it's about smart work. You just proved it!", icon: "🚀" },
+        "405060": { title: "Hidden Gem", message: "You found one of the rarest codes. Your curiosity will take you far in life!", icon: "💎" },
+        "708090": { title: "Ultimate Gift", message: "This is the final secret. Believe in yourself!", icon: "✨" }
+    };
+
+    const inputCode = document.getElementById('giftPasscode').value.trim();
+    const data = giftDataMap[inputCode];
+
+    if (data) {
+        // কাউন্ট ১ বাড়ানো এবং সেভ করা
+        openCount++;
+        localStorage.setItem('giftUsageCount', openCount);
+
+        // UI আপডেট
+        document.getElementById('giftTitle').innerText = data.title;
+        document.getElementById('giftMessage').innerText = data.message;
+        document.getElementById('giftIcon').innerText = data.icon;
+
+        document.getElementById('codePopup').style.display = 'none';
+        document.getElementById('gift-section').style.display = 'flex';
+        document.getElementById('giftPasscode').value = "";
+
+        console.log("Gift opened " + openCount + " times");
+    } else {
+        alert("ভুল কোড! সঠিক কোডটি দিন।");
+        document.getElementById('giftPasscode').value = "";
     }
 };
 
-document.addEventListener('click', (e) => {
-    const item = e.target.closest('.student-item');
+window.closeGift = function() {
+    document.getElementById('gift-section').style.display = 'none';
+    document.getElementById('main-content').style.filter = 'none';
     
-    if (item) {
-        const name = item.querySelector('p').innerText;
-        const data = studentData[name] || { nickname: "N/A", img: "default.jpg", fb: "#", wa: "#" };
+    // যদি ২ বার হয়ে যায়, চাইলে বাটনটি হাইড করে দিতে পারো
+    let openCount = parseInt(localStorage.getItem('giftUsageCount')) || 0;
+    if (openCount >= 2) {
+        const giftBtn = document.getElementById('giftOpenBtn');
+        if (giftBtn) giftBtn.style.display = 'none';
+    }
+};
 
-        // মেইন কন্টেন্ট হাইড করা
-        mainContainer.classList.add('hide-layout');
-        mainHeader.classList.add('hide-layout');
-        sidePanel.style.opacity = '0';
-        sidePanel.style.visibility = 'hidden';
+/* --- Screenshot Protection for Mobile --- */
 
-        // কার্ডে তথ্য সেট করা
-        displayName.innerText = name;
-        document.getElementById('display-nickname').innerText = `(${data.nickname})`;
-        document.getElementById('display-img').src = data.img;
-        document.getElementById('fb-link').href = data.fb;
-        document.getElementById('wa-link').href = data.wa;
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') {
+        // ইউজার যখন স্ক্রিনশট নিতে অন্য কোনো মোডে যায় বা অ্যাপ মিনিমাইজ করে
+        const giftSection = document.getElementById('gift-section');
+        const codePopup = document.getElementById('codePopup');
+        
+        if (giftSection.style.display === 'flex') {
+            giftSection.style.display = 'none';
+            document.getElementById('main-content').style.filter = 'none';
+            alert("Security Alert: Screenshot attempt detected! Gift closed.");
+        }
+        
+        if (codePopup.style.display === 'flex') {
+            codePopup.style.display = 'none';
+        }
+    }
+});
 
-        // প্রোফাইল কার্ড দেখানো
-        profileCard.style.display = 'block';
-        setTimeout(() => {
-            profileCard.style.transform = 'translate(-50%, -50%) scale(1)';
-            profileCard.style.opacity = '1';
-        }, 10);
-        backBtn.style.display = 'block';
+// উইন্ডো ফোকাস চলে গেলে (যেমন নোটিফিকেশন বার নামালে) গিফট হাইড হবে
+window.addEventListener('blur', function() {
+    const giftSec = document.getElementById('gift-section');
+    if (giftSec.style.display === 'flex') {
+        giftSec.style.display = 'none';
+        document.getElementById('main-content').style.filter = 'none';
     }
 });
 </script>

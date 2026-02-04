@@ -1033,13 +1033,276 @@ hr{
     }
 }
 
-/* অ্যানিমেশন চলাকালীন স্ক্রলবার বন্ধ রাখা */
-body {
-    overflow-x: hidden;
+
+/* Gift Section styling with Heavy Blur */
+.gift-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10, 0, 20, 0.85);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* যখন মেইন কন্টেন্ট আসবে তখন স্ক্রলবার সচল হবে */
-#main-content {
+.gift-content {
+    background: rgba(255, 255, 255, 0.07);
+    padding: 40px 30px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+    max-width: 450px;
     width: 100%;
-    min-height: 100vh;
+    animation: zoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gift-icon { font-size: 60px; margin-bottom: 15px; }
+
+.gift-description p {
+    color: #e0e0e0;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive Fixes for All Screens */
+@media (max-width: 768px) {
+    .title-content { font-size: 24px !important; }
+    .side-panel:not(.expanded) {
+        bottom: 20px; top: auto; left: 50%;
+        transform: translateX(-50%);
+        width: 90%; height: 180px;
+    }
+    .container { padding-top: 100px; }
+    .gift-content { padding: 30px 20px; }
+}
+
+@media (max-height: 600px) {
+    .gift-content { scale: 0.8; }
+    .gift-icon { font-size: 40px; }
+}
+
+/* --- তোমার আগের মূল CSS এর সাথে নিচের এই আপডেটগুলো যুক্ত করো --- */
+
+/* ১. গিফট বাটন ডিজাইন (Add Information এর নিচে থাকবে) */
+.gift-trigger-btn {
+    width: 280px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 15px;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 5;
+    background: rgba(248, 215, 249, 0.05);
+    border: 1px solid rgba(248, 215, 249, 0.3);
+    color: #f8d7f9;
+    margin-top: 5px; /* Add Info বাটন থেকে সামান্য গ্যাপ */
+}
+
+.gift-trigger-btn:hover {
+    background: #f8d7f9 !important;
+    color: #0f001f !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(248, 215, 249, 0.4);
+}
+
+/* ২. গিফট কোড পপ-আপ (Secret Input) ডিজাইন */
+.code-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    display: none; /* JS দিয়ে কন্ট্রোল হবে */
+    justify-content: center;
+    align-items: center;
+    z-index: 100000; /* সবার উপরে থাকবে */
+}
+
+.code-popup-content {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    padding: 40px 30px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    animation: popupFadeIn 0.4s ease-out;
+}
+
+@keyframes popupFadeIn {
+    from { opacity: 0; transform: translateY(-20px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#giftPasscode {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(248, 215, 249, 0.3);
+    border-radius: 12px;
+    color: #f8d7f9;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#giftPasscode::placeholder {
+    letter-spacing: normal;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ৩. গিফট ক্লেম করার পর মেইন গিফট সেকশন */
+.gift-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10, 0, 20, 0.9);
+    backdrop-filter: blur(60px); /* তোমার রিকুয়েস্ট অনুযায়ী হেভি ব্লার */
+    -webkit-backdrop-filter: blur(60px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100001;
+}
+
+.gift-content {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 50px 30px;
+    border-radius: 35px;
+    border: 1px solid rgba(248, 215, 249, 0.2);
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 0 100px rgba(248, 215, 249, 0.1);
+}
+
+/* ৪. মোবাইল রেসপন্সিভনেস ফিক্স (Responsive Updates) */
+@media (max-width: 768px) {
+    .button-group {
+        gap: 15px; /* মোবাইলে গ্যাপ একটু কমানো */
+        width: 100%;
+        align-items: center;
+    }
+
+    .glass-btn, .gift-trigger-btn {
+        width: 100%;
+        max-width: 320px; /* মোবাইলে বাটন যেন স্ক্রিনের সাথে ফিট হয় */
+    }
+
+    .side-panel {
+        /* মোবাইলে বাটনগুলোর নিচে সাইড প্যানেল নেওয়ার জন্য */
+        position: relative !important;
+        margin: 30px auto !important;
+        order: 10;
+    }
+
+    .container {
+        padding-top: 130px; /* টাইটেল থেকে দূরত্ব */
+        height: auto;
+        flex-direction: column;
+    }
+}
+
+/* কিবোর্ড ওপেন হলে ইনপুট যেন ঢেকে না যায় */
+@media (max-height: 500px) {
+    .code-popup-content {
+        padding: 20px;
+        scale: 0.8;
+    }
+}
+
+/* গিফট মেসেজের বিশেষ ডিজাইন */
+#giftMessage {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(248, 215, 249, 0.3);
+}
+
+.gift-content h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- Gift Section Fixes (Add this at the very bottom of your styles2.css) --- */
+
+/* কোড ইনপুট পপ-আপ ঠিক করা */
+.code-popup-overlay {
+    display: none; /* ডিফল্ট ভাবে লুকানো */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    z-index: 999999; /* যেন সবার উপরে থাকে */
+    justify-content: center;
+    align-items: center;
+}
+
+/* গিফট মেসেজ কন্টেইনার */
+.gift-container {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1000000;
+    background: rgba(15, 0, 31, 0.95);
+    backdrop-filter: blur(60px); /* তোমার রিকুয়েস্ট অনুযায়ী */
+    justify-content: center;
+    align-items: center;
+}
+
+/* গিফট মেসেজ বক্স ডিজাইন */
+.gift-content {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(248, 215, 249, 0.3);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 50px rgba(248, 215, 249, 0.1);
+}
+
+/* মেসেজ টেক্সট যেন ক্লিয়ার দেখা যায় */
+#giftMessage {
+    color: #ffffff !important;
+    font-size: 16px !important;
+    line-height: 1.6;
+    margin: 20px 0;
+    opacity: 1 !important; /* টেক্সট যেন ঝাপসা না হয় */
+}
+
+/* বাটন গ্যাপ ফিক্স */
+.popup-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
 }
