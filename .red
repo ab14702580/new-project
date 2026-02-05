@@ -1,1 +1,8 @@
-search button a click korar pore active database ar je card gula ase segular je kono akter upore click korle sei card are all information show korbe and backi sob gula invisible hoia jaibo and information background blur thacbo and back button thacbo jate click korle aber ager moto hoia jai
+// --- সিকিউরিটি: ইনস্পেক্ট এলিমেন্ট ব্লক ---
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function(e) {
+        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+            return false;
+        }
+    };
+
