@@ -16,7 +16,7 @@
     </div>
     <div id="second-animation" class="devoloper-intro">
         <h1><span class="developer"><span class="animated-gradient-text">DEVELOPED</span></span> <span class="By"> By </span> <span class="abdullah">ABDULLAH</span></h1>
-        <h1 class="second-h1"><span class="design">DESIGN</span> <span class="intro"> INTRO</span> <span class="tanjim"> TANJIM</span></h1>
+        <h1 class="second-h1"><span class="design">DESIGN</span> <span class="intro"> By</span> <span class="tanjim"> TANJIM</span></h1>
     </div>
 </div>
 
@@ -55,7 +55,7 @@
             <div class="gift-icon" id="giftIcon">🎁</div>
             <div class="gift-description">
                 <h1 id="giftTitle" style="color: #f8d7f9;">Congratulations!</h1>
-                <p id="giftMessage" style="color: white; font-size: 16px; line-height: 1.6;"></p>
+                <p id="giftMessage" style="color: white; font-size: 16px; line-height: 1.6; height: 130px; overflow-y: auto;"></p>
             </div>
             <button class="glass-btn primary" onclick="closeGift()" style="width: 150px; margin: 20px auto 0;">Close</button>
         </div>
@@ -70,13 +70,14 @@
                 <div class="student-item"><span class="status-dot"></span><p>Tanjil Hasan</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Sakib Hossain</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Sahajalal Shuaib</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Juewl JR</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Yasin Arafat</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Maruf</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Tousif</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Junaed(Commarce)</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Sabbir(Commarce)</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Aysha (≽^•⩊•^≼)</p></div>
-                <div class="student-item"><span class="status-dot"></span><p>Njeda Afrin )</p></div>
+                <div class="student-item"><span class="status-dot"></span><p>Njeda Afrin</p></div>
                 <div class="student-item"><span class="status-dot"></span><p>Onamika</p></div>
             </div>
         </div>
@@ -115,8 +116,8 @@
 
     <div class="modal-overlay" id="overlay"></div>
 <script>
-    // আপনার গুগল স্ক্রিপ্ট লিঙ্কটি এখানে দিন
-    const googleScriptURL = "https://script.google.com/macros/s/AKfycbz78_L9BnwZMyyst92sFiYvHecfS7c29Or3eWfT5vN0a0U7Ih8dDXtzVUIYBatDDBve/exec";
+    // আপনার গুগল স্ক্রিপ্ট লিঙ্ক
+    const googleScriptURL = "https://script.google.com/macros/s/AKfycbxZO07ovDdiJs6PmGvbuY9l_BhXCsO3e5HmnUp9YSI06vvlY_FFb_o9DaG3AewKQ658/exec";
 
     const searchBtn = document.querySelector('.primary');
     const sidePanel = document.querySelector('.side-panel');
@@ -135,7 +136,19 @@
     const mainContainer = document.querySelector('.container');
     const mainHeader = document.querySelector('.content-header');
 
-    // --- Gift Logic (Original Structure) ---
+    // --- ডাটাবেস: এখানে আপনি সবার আলাদা ডাকনাম, ছবি ও লিঙ্ক সেট করবেন ---
+    const studentData = {
+        "Abdullah Fahad (Admin 𓆩♕𓆪)": { nickname: "The Legend 𓆩♕𓆪", img: "https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/448086204_435867542569096_3110963552751658517_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=7TQ0P3oYyUAQ7kNvwHMOQJg&_nc_oc=AdlueJQnDWAwkLoVfM1_tCVg_QiaB8oyJlgolehUek4EduzRqAs5gIifJhWMEFXn2wA&_nc_zt=23&_nc_ht=scontent.fdac24-2.fna&_nc_gid=_xomGKDUrlncqqIrjLFNpw&oh=00_Aft_1j3cVB_bH6724StvntsgA-xsrxKyoUw14pFgslUnSw&oe=698A675A", fb: "https://www.facebook.com/abdullah.fahad.194633", wa: "#" },
+        "Juewl JR": {nickname: "Russian Lover 💦"},
+        "Tanjim Hasan(Admin 𓆩♕𓆪)": { nickname: "Creative Mind 💋", img: "https://scontent.fdac198-2.fna.fbcdn.net/v/t39.30808-1/519383221_122167591244445760_3736362165267374916_n.jpg?stp=dst-jpg_p100x100_tt6&_nc_cat=107&ccb=1-7&_nc_sid=e99d92&_nc_ohc=3GGAX-U1TFUQ7kNvwF9hezO&_nc_oc=AdkchNIPDMale0S9ByPaXV7821fA4whFTk8pT-b7pTucSsj82Os_G49N6FGH76Dcigw&_nc_ad=z-m&_nc_cid=0&_nc_zt=24&_nc_ht=scontent.fdac198-2.fna&_nc_gid=fUosTGEM9gEokHA1c9NfIA&oh=00_AfsHUMg7rEBca-VAVb2LJnK_kNBR1pz6ta5l3kLINyQNXQ&oe=698A4C0F", fb: "https://www.facebook.com/61563372823612", wa: "#" },
+        "Aysha (≽^•⩊•^≼)": { nickname: "MEOW (≽^•⩊•^≼)", img: "aysha.jpg", fb: "#", wa: "#" },
+        "Sakib Hossain": { nickname: "BBC", img: "https://via.placeholder.com/150", fb: "#", wa: "#" },
+        "Samiul Islam": { nickname: "Sami", img: "https://via.placeholder.com/150", fb: "#", wa: "#" }
+        // নতুন কাউকে অ্যাড করতে চাইলে হুবহু নাম লিখে কমা দিয়ে নিচে যোগ করবেন
+    };
+
+    
+    // --- Gift Logic ---
     const giftOpenBtn = document.getElementById('giftOpenBtn');
     const codePopup = document.getElementById('codePopup');
     const giftPasscode = document.getElementById('giftPasscode');
@@ -154,46 +167,48 @@
         giftPasscode.value = "";
     }
 
-    // --- ২ বার লিমিট করার লজিক (শুধুমাত্র এই ফাংশনটি মডিফাই করা হয়েছে) ---
     window.checkGiftCode = async function() {
         const inputCode = giftPasscode.value.trim();
-        
         const giftDataMap = {
-            "1470": { title: "Congratulations Aysha!", message: "kemon aso valo", icon: "💻" },
-            "2580": { title: "Top Achiever", message: "SSC 2026 is your year!", icon: "🏆" },
-            "3690": { title: "Design King", message: "The visual aesthetic of this site is amazing!", icon: "🎨" },
-            "102030": { title: "VIP Access", message: "Success isn't just about hard work!", icon: "🚀" },
-            "405060": { title: "Hidden Gem", message: "You found one of the rarest codes!", icon: "💎" },
-            "708090": { title: "Ultimate Gift", message: "Believe in yourself!", icon: "✨" }
+            "1470": { title: "Congratulations Juewl!", message: "Title: Legend Alert! 🚨 Message: স্যার, আপনি ক্লাসে আসা মানেই আমাদের বিনোদনের ডিব্বা খুলে যাওয়া! পড়ালেখার চাপে যখন আমাদের ফিউজ উড়ে যায়, আপনার হাসি আমাদের চার্জ দেয়। আপনি সেরা স্যার!", icon: "💻" },
+            "2580": { title: "Tanjil", message: "you are video hot ( ͜.🍆 ͜.)", icon: "🏆" },
+            "102030": { title: "VIP Access Aysha", message: "{Abdullah} দেখো, অনেক চেষ্টা করলাম নিজের লাইফটাকে 'Single Thread' এ চালাতে, কিন্তু বারবার 'System Error' দেখাচ্ছে। মনে হচ্ছে আমার লাইফে তোমার নামের একটা 'Database' দরকার। আমার হার্টের সব 'Admin Power' তোমাকে দিতে চাই, 'Access' টা কি গ্রান্ট (Grant) করবে? tomake just ei text debar jonno ami ei website ta build korsi that's it", icon: "bey" }
         };
 
-        const data = giftDataMap[inputCode];
+        const specialFixedGift = {
+            title: "VIP Member - Level 1",
+            message: "ক্লাসে তোমার সাথে কাটানো সময়গুলো সত্যিই স্পেশাল। পড়ালেখা তো সবাই করে, কিন্তু তোমার মতো হাসিখুশি একজন বন্ধু পাশে থাকলে ক্লাসের একঘেয়েমি ভাবটা আর থাকে না। আমাদের এই ছোট ছোট স্মৃতিগুলোই হবে বড় হওয়ার পর সবচেয়ে দামী সম্পদ। এভাবেই সবসময় পাশে থেকো!",
+        };
 
-        if (data) {
+        if (giftDataMap[inputCode]) {
             try {
-                // অনলাইনে চেক করা (২ বার লিমিট)
                 const response = await fetch(`${googleScriptURL}?code=${inputCode}`);
                 const result = await response.text();
 
-                if (result === "limit_reached") {
-                    alert("দুঃখিত! এই কোডটি যেকোনো ডিভাইস থেকে মোট ২ বার ব্যবহার হয়ে গেছে।");
-                    closeCodePopup();
-                } else {
-                    // সফল হলে গিফট দেখানো
+                if (result === "show_main_gift") {
+                    const data = giftDataMap[inputCode];
                     document.getElementById('giftTitle').innerText = data.title;
                     document.getElementById('giftMessage').innerText = data.message;
                     document.getElementById('giftIcon').innerText = data.icon;
-
-                    codePopup.style.display = 'none';
-                    giftSec.style.display = 'flex';
-                    giftPasscode.value = "";
+                } 
+                else if (result === "show_fixed_gift") {
+                    document.getElementById('giftTitle').innerText = specialFixedGift.title;
+                    document.getElementById('giftMessage').innerText = specialFixedGift.message;
+                    document.getElementById('giftIcon').innerText = specialFixedGift.icon;
                 }
+                else {
+                    alert("দুঃখিত! এই কোডটির ব্যবহারের সীমা শেষ হয়ে গেছে।");
+                    closeCodePopup();
+                    return;
+                }
+                codePopup.style.display = 'none';
+                giftSec.style.display = 'flex';
+                giftPasscode.value = "";
             } catch (error) {
                 alert("ইন্টারনেট সমস্যা!");
             }
         } else {
-            alert("ভুল কোড! সঠিক কোডটি দিন।");
-            giftPasscode.value = "";
+            alert("ভুল কোড!");
         }
     };
 
@@ -202,7 +217,38 @@
         document.getElementById('main-content').style.filter = 'none';
     };
 
-    // --- আপনার অরিজিনাল বাকি সব কোড (অপরিবর্তিত) ---
+    // --- Student Interaction (ক্লিক করলে আলাদা নিকনেম শো করবে) ---
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.student-item');
+        if (item) {
+            const name = item.querySelector('p').innerText.trim();
+            mainContainer.classList.add('hide-layout');
+            mainHeader.classList.add('hide-layout');
+            sidePanel.style.opacity = '0';
+            sidePanel.style.visibility = 'hidden';
+            sidePanel.style.pointerEvents = 'none';
+            sidePanel.classList.remove('active', 'expanded');
+            overlay.classList.remove('active');
+            
+            displayName.innerText = name;
+            profileCard.style.display = 'block';
+            setTimeout(() => {
+                profileCard.style.transform = 'translate(-50%, -50%) scale(1)';
+                profileCard.style.opacity = '1';
+            }, 10);
+            backBtn.style.display = 'block';
+            searchBtn.innerText = "Search Student";
+
+            // আলাদা ডাকনাম খুঁজে বের করা
+            const data = studentData[name] || { nickname: "Student", img: "default.jpg", fb: "#", wa: "#" };
+            document.getElementById('display-nickname').innerText = `(${data.nickname})`;
+            document.getElementById('display-img').src = data.img;
+            document.getElementById('fb-link').href = data.fb;
+            document.getElementById('wa-link').href = data.wa;
+        }
+    });
+
+    // --- বাকি সব অরিজিনাল কোড ---
     addInfoBtn.addEventListener('click', () => {
         clickCount++;
         if (clickCount === 7) {
@@ -220,7 +266,7 @@
         const name = studentInput.value.trim();
         if (name !== "") {
             const newItem = `<div class="student-item"><span class="status-dot"></span><p>${name}</p></div>`;
-            scrollerContent.innerHTML = newItem + scrollerContent.innerHTML + newItem;
+            scrollerContent.innerHTML = newItem + scrollerContent.innerHTML;
             addModal.classList.remove('show');
             studentInput.value = "";
             alert("Information Added!");
@@ -231,39 +277,6 @@
 
     const originalItems = scrollerContent.innerHTML;
     scrollerContent.innerHTML = originalItems + originalItems;
-
-    document.addEventListener('click', (e) => {
-        const item = e.target.closest('.student-item');
-        if (item) {
-            const name = item.querySelector('p').innerText;
-            mainContainer.classList.add('hide-layout');
-            mainHeader.classList.add('hide-layout');
-            sidePanel.style.opacity = '0';
-            sidePanel.style.visibility = 'hidden';
-            sidePanel.style.pointerEvents = 'none';
-            sidePanel.classList.remove('active', 'expanded');
-            overlay.classList.remove('active');
-            displayName.innerText = name;
-            profileCard.style.display = 'block';
-            setTimeout(() => {
-                profileCard.style.transform = 'translate(-50%, -50%) scale(1)';
-                profileCard.style.opacity = '1';
-            }, 10);
-            backBtn.style.display = 'block';
-            searchBtn.innerText = "Search Student";
-
-            // প্রোফাইল ডেটা আপডেট
-            const studentData = {
-                "Abrar Fahim": { nickname: "Fahim", img: "https://via.placeholder.com/150", fb: "https://facebook.com/abrar", wa: "https://wa.me/880123456789" },
-                "Samiul Islam": { nickname: "Sami", img: "https://via.placeholder.com/150", fb: "https://facebook.com/samiul", wa: "https://wa.me/880123456789" }
-            };
-            const data = studentData[name] || { nickname: "N/A", img: "default.jpg", fb: "#", wa: "#" };
-            document.getElementById('display-nickname').innerText = `(${data.nickname})`;
-            document.getElementById('display-img').src = data.img;
-            document.getElementById('fb-link').href = data.fb;
-            document.getElementById('wa-link').href = data.wa;
-        }
-    });
 
     backBtn.addEventListener('click', () => {
         mainContainer.classList.remove('hide-layout');
@@ -279,19 +292,13 @@
 
     setTimeout(function() {
         document.getElementById('first-animation').style.display = 'none';
-        const secondDiv = document.getElementById('second-animation');
-        secondDiv.style.display = 'block';
+        document.getElementById('second-animation').style.display = 'block';
     }, 3000);
 
     setTimeout(function() {
         const introLayer = document.querySelector('.animation-1');
-        if (introLayer) {
-            introLayer.remove();
-        }
-        const mainContent = document.getElementById('main-content');
-        if (mainContent) {
-            mainContent.style.display = 'block';
-        }
+        if (introLayer) introLayer.remove();
+        document.getElementById('main-content').style.display = 'block';
     }, 8000);
 
     function toggleSearch() {
@@ -306,9 +313,7 @@
         } else {
             sidePanel.classList.remove('active');
             overlay.classList.remove('active');
-            setTimeout(() => {
-                sidePanel.classList.remove('expanded');
-            }, 600);
+            setTimeout(() => sidePanel.classList.remove('expanded'), 600);
             searchBtn.innerText = "Search Student";
         }
     }
@@ -321,18 +326,14 @@
     overlay.addEventListener('click', toggleSearch);
 
     const bgContent = document.querySelector('.background-content p');
-    const text = " DEVOLOPER ABDULLAH - DESIGNER TANJIM";
-    bgContent.innerText = text.repeat(500);
+    bgContent.innerText = " DEVOLOPER ABDULLAH - DESIGNER TANJIM".repeat(300);
 
-    /* --- Screenshot Protection --- */
     document.addEventListener('visibilitychange', function() {
         if (document.visibilityState === 'hidden' && giftSec.style.display === 'flex') {
             giftSec.style.display = 'none';
-            document.getElementById('main-content').style.filter = 'none';
             alert("Security Alert: Gift closed.");
         }
     });
-    
 </script>
 </body>
 </html>
