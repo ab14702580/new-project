@@ -94,7 +94,7 @@
         
         <div class="student-info-grid">
             <p><strong>Batch:</strong> SSC 2026</p>
-            <p><strong>Number:</strong> 01984301320</p>
+            <p><strong>Number:</strong> <div id="Number"></div></p>
         </div>
 
         <div class="social-links">
@@ -137,17 +137,89 @@
     const mainHeader = document.querySelector('.content-header');
 
     // --- ডাটাবেস: এখানে আপনি সবার আলাদা ডাকনাম, ছবি ও লিঙ্ক সেট করবেন ---
+        
     const studentData = {
-        "Abdullah Fahad (Admin 𓆩♕𓆪)": { nickname: "The Legend 𓆩♕𓆪", img: "https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/448086204_435867542569096_3110963552751658517_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=7TQ0P3oYyUAQ7kNvwHMOQJg&_nc_oc=AdlueJQnDWAwkLoVfM1_tCVg_QiaB8oyJlgolehUek4EduzRqAs5gIifJhWMEFXn2wA&_nc_zt=23&_nc_ht=scontent.fdac24-2.fna&_nc_gid=_xomGKDUrlncqqIrjLFNpw&oh=00_Aft_1j3cVB_bH6724StvntsgA-xsrxKyoUw14pFgslUnSw&oe=698A675A", fb: "https://www.facebook.com/abdullah.fahad.194633", wa: "#" },
+        "Abdullah Fahad (Admin 𓆩♕𓆪)": { nickname: "The Legend 𓆩♕𓆪", img: "https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/448086204_435867542569096_3110963552751658517_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=7TQ0P3oYyUAQ7kNvwHMOQJg&_nc_oc=AdlueJQnDWAwkLoVfM1_tCVg_QiaB8oyJlgolehUek4EduzRqAs5gIifJhWMEFXn2wA&_nc_zt=23&_nc_ht=scontent.fdac24-2.fna&_nc_gid=_xomGKDUrlncqqIrjLFNpw&oh=00_Aft_1j3cVB_bH6724StvntsgA-xsrxKyoUw14pFgslUnSw&oe=698A675A", fb: "abdullah.fahad.194633", wa: "8801984301320" },
         "Juewl JR": {nickname: "Russian Lover 💦"},
-        "Tanjim Hasan(Admin 𓆩♕𓆪)": { nickname: "Creative Mind 💋", img: "https://scontent.fdac198-2.fna.fbcdn.net/v/t39.30808-1/519383221_122167591244445760_3736362165267374916_n.jpg?stp=dst-jpg_p100x100_tt6&_nc_cat=107&ccb=1-7&_nc_sid=e99d92&_nc_ohc=3GGAX-U1TFUQ7kNvwF9hezO&_nc_oc=AdkchNIPDMale0S9ByPaXV7821fA4whFTk8pT-b7pTucSsj82Os_G49N6FGH76Dcigw&_nc_ad=z-m&_nc_cid=0&_nc_zt=24&_nc_ht=scontent.fdac198-2.fna&_nc_gid=fUosTGEM9gEokHA1c9NfIA&oh=00_AfsHUMg7rEBca-VAVb2LJnK_kNBR1pz6ta5l3kLINyQNXQ&oe=698A4C0F", fb: "https://www.facebook.com/61563372823612", wa: "#" },
+        "Tanjim Hasan(Admin 𓆩♕𓆪)": { nickname: "Creative Mind 💋", img: "https://scontent.fdac198-2.fna.fbcdn.net/v/t39.30808-1/519383221_122167591244445760_3736362165267374916_n.jpg?stp=dst-jpg_p100x100_tt6&_nc_cat=107&ccb=1-7&_nc_sid=e99d92&_nc_ohc=3GGAX-U1TFUQ7kNvwF9hezO&_nc_oc=AdkchNIPDMale0S9ByPaXV7821fA4whFTk8pT-b7pTucSsj82Os_G49N6FGH76Dcigw&_nc_ad=z-m&_nc_cid=0&_nc_zt=24&_nc_ht=scontent.fdac198-2.fna&_nc_gid=fUosTGEM9gEokHA1c9NfIA&oh=00_AfsHUMg7rEBca-VAVb2LJnK_kNBR1pz6ta5l3kLINyQNXQ&oe=698A4C0F", fb: "fb://facewebmodal/f?href=https://www.facebook.com/61563372823612", wa: "#" },
         "Aysha (≽^•⩊•^≼)": { nickname: "MEOW (≽^•⩊•^≼)", img: "aysha.jpg", fb: "#", wa: "#" },
         "Sakib Hossain": { nickname: "BBC", img: "https://via.placeholder.com/150", fb: "#", wa: "#" },
         "Samiul Islam": { nickname: "Sami", img: "https://via.placeholder.com/150", fb: "#", wa: "#" }
         // নতুন কাউকে অ্যাড করতে চাইলে হুবহু নাম লিখে কমা দিয়ে নিচে যোগ করবেন
     };
+// --- ১. ফেসবুক ও হোয়াটসঅ্যাপ ওপেন করার স্মার্ট ফাংশন ---
+function openSocialApp(platform, value) {
+    if (!value || value === "#") {
+        alert("তথ্য পাওয়া যায়নি!");
+        return;
+    }
 
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (platform === 'fb') {
+        let username = value.replace('https://www.facebook.com/', '').replace('/', '');
+        if (isMobile) {
+            window.location.href = "fb://facewebmodal/f?href=https://www.facebook.com/" + username;
+            setTimeout(() => { window.location.href = "https://www.facebook.com/" + username; }, 2000);
+        } else {
+            window.open("https://www.facebook.com/" + username, '_blank');
+        }
+    } 
     
+    else if (platform === 'wa') {
+        // নম্বর থেকে যদি কোনো স্পেস বা ড্যাশ থাকে তা সরিয়ে ফেলা
+        let number = value.replace(/\D/g, ''); 
+        if (isMobile) {
+            // মোবাইলে সরাসরি হোয়াটসঅ্যাপ অ্যাপ চ্যাট ওপেন হবে
+            window.location.href = "whatsapp://send?phone=" + number;
+            setTimeout(() => { window.location.href = "https://wa.me/" + number; }, 2000);
+        } else {
+            // পিসিতে হোয়াটসঅ্যাপ ওয়েব ওপেন হবে
+            window.open("https://web.whatsapp.com/send?phone=" + number, '_blank');
+        }
+    }
+}
+
+// --- ২. স্টুডেন্ট কার্ড ক্লিক লজিক (আপডেটেড) ---
+document.addEventListener('click', (e) => {
+    const item = e.target.closest('.student-item');
+    if (item) {
+        const name = item.querySelector('p').innerText.trim();
+        
+        // আপনার UI হাইড করার লজিক
+        mainContainer.classList.add('hide-layout');
+        mainHeader.classList.add('hide-layout');
+        sidePanel.style.opacity = '0';
+        sidePanel.style.visibility = 'hidden';
+        
+        const data = studentData[name] || { nickname: "Student", img: "default.jpg", fb: "#", wa: "#" };
+        
+        displayName.innerText = name;
+        document.getElementById('display-nickname').innerText = `(${data.nickname})`;
+        document.getElementById('display-img').src = data.img;
+        
+        profileCard.style.display = 'block';
+        setTimeout(() => {
+            profileCard.style.transform = 'translate(-50%, -50%) scale(1)';
+            profileCard.style.opacity = '1';
+        }, 10);
+        backBtn.style.display = 'block';
+
+        // --- ফেসবুক বাটনের জন্য ---
+        const fbBtn = document.getElementById('fb-link');
+        fbBtn.onclick = (event) => {
+            event.preventDefault();
+            openSocialApp('fb', data.fb);
+        };
+
+        // --- হোয়াটসঅ্যাপ বাটনের জন্য ---
+        const waBtn = document.getElementById('wa-link');
+        waBtn.onclick = (event) => {
+            event.preventDefault();
+            openSocialApp('wa', data.wa);
+        };
+    }
+});
     // --- Gift Logic ---
     const giftOpenBtn = document.getElementById('giftOpenBtn');
     const codePopup = document.getElementById('codePopup');
